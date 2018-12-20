@@ -63,6 +63,29 @@ CharacterStats.prototype.takeDamage = function() {
   * should inherit takeDamage() from CharacterStats
 */
  
+function Humanoid(attrs) {
+  CharacterStats.call(this, attrs);
+  this.team = attrs.team
+  this.weapons = attrs.weapons
+  this.language = attrs.language
+}
+
+// need to think about this line a bit more
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+Humanoid.prototype.greet = function() {
+  return `${this.name} offers a greeting in ${this.language}.`
+}
+
+// let bob = new Humanoid({
+//   healthPoints: 50,
+//   name: 'bob',
+//   createdAt: new Date(),
+//   language: 'english'
+// })
+
+// console.log(bob.takeDamage());
+
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
