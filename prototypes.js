@@ -39,6 +39,7 @@ GameObject.prototype.destroy = function() {
   * should inherit destroy() from GameObject's prototype
 */
 function CharacterStats(attrs) {
+  // not sure i could explain .call
   GameObject.call(this, attrs);
   this.healthPoints = attrs.healthPoints
   this.name = attrs.name
