@@ -44,10 +44,13 @@ function CharacterStats(attrs) {
   this.name = attrs.name
 }
 
+// explicitly setting the CharacterStats.prototype to a GameObject.prototype
 CharacterStats.prototype = Object.create(GameObject.prototype);
+// set CharacterStats.prototype.constructor to the proper function, so that it knows to create a CharacterStats and not a GameObject
+// CharacterStats.prototype.constructor = CharacterStats
 
 CharacterStats.prototype.takeDamage = function() {
-  return `${this.name} took damage.`
+  return `${this.name} took damage. ${this.healthPoints} HP remaining`
 }
 
 // // testing
@@ -77,7 +80,6 @@ function Humanoid(attrs) {
   this.language = attrs.language
 }
 
-// need to think about this line a bit more
 Humanoid.prototype = Object.create(CharacterStats.prototype);
 
 Humanoid.prototype.greet = function() {
@@ -109,7 +111,7 @@ Hero.prototype = Object.create(Humanoid.prototype);
 Hero.prototype.attack = function(enemy) {
   
   if (Math.random() < .5) {
-    enemy.healthPoints -= 5
+    enemy.healthPoints -= 7.5
     return enemy.takeDamage()
   } else {
     return `${this.name}'s attack missed!`    
@@ -209,6 +211,11 @@ Villain.prototype.attack = function(enemy) {
   // console.log(swordsman.healthPoints); // 15
 
   function game() {
+    console.log(`${mage.name} HP: ${mage.healthPoints}`);
+    console.log(`${swordsman.name} HP: ${swordsman.healthPoints}`);
+    console.log('-------------');
+    
+    
     while (mage.healthPoints > 0 && swordsman.healthPoints > 0) {
       if (Math.random() < .5) {
         console.log(mage.attack(swordsman))
